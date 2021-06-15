@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css">
+  <script src="https://cdn.form.io/formiojs/formio.full.min.js"></script>
+
+  <title>Kalkulator stawki</title>
+</head>
+<body>
+  <div class="col-lg-8 mx-auto p-3 py-md-5"">
+    <div id="form">
+
+    </div>
+  </div>
+  <script>
+    Formio.icons = 'fontawesome';
+    Formio.createForm(document.getElementById('form'), {
+      "display": "wizard",
+      "components": [
+          {
+              "title": "Informacje podstawowe",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_basic_info",
+              "type": "panel",
+              "label": "Informacje podstawowe",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Chcę pracować jako",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Kierownik",
+                                  "value": "kierownik"
+                              },
+                              {
+                                  "label": "Sternik",
+                                  "value": "sternik"
+                              },
+                              {
+                                  "label": "Instruktor",
+                                  "value": "instruktor"
+                              },
+                              {
+                                  "label": "Młoda Kadra",
+                                  "value": "mloda_kadra"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "required": true,
+                          "onlyAvailableItems": false
+                      },
+                      "key": "stanowisko",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  },
+                  {
+                      "label": "Potrafię prowadzić następujące zajęcia",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Żeglarstwo",
+                                  "value": "zeglarstwo"
+                              },
+                              {
+                                  "label": "Windsurfing",
+                                  "value": "windsurfing"
+                              },
+                              {
+                                  "label": "Akrobatyka",
+                                  "value": "akrobatyka"
+                              },
+                              {
+                                  "label": "Park linowy",
+                                  "value": "park_linowy"
+                              },
+                              {
+                                  "label": "Padel, tenis ziemny lub squash",
+                                  "value": "padel"
+                              },
+                              {
+                                  "label": "Kolarstwo",
+                                  "value": "kolarstwo"
+                              },
+                              {
+                                  "label": "Taniec",
+                                  "value": "taniec"
+                              },
+                              {
+                                  "label": "Kajakarstwo",
+                                  "value": "kajakarstwo"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "umiejetnosci",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  },
+                  {
+                      "label": "Posiadam następujące kwalifikacje pedagogiczne",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Wychowawca kolonijny",
+                                  "value": "wychowawca"
+                              },
+                              {
+                                  "label": "Kierownik wypoczynku",
+                                  "value": "kierownik"
+                              },
+                              {
+                                  "label": "Nauczyciel",
+                                  "value": "nauczyciel"
+                              },
+                              {
+                                  "label": "Student AWF",
+                                  "value": "student_awf"
+                              },
+                              {
+                                  "label": "Licencjat AWF",
+                                  "value": "licencjat_awf"
+                              },
+                              {
+                                  "label": "Magister AWF",
+                                  "value": "magister_awf"
+                              },
+                              {
+                                  "label": "Doktor AWF",
+                                  "value": "doktor_awf"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "kwalifikacje",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Żeglarstwo",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_zeglarstwo",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "zeglarstwo"
+              },
+              "type": "panel",
+              "label": "Uprawnienia i doświadczenie żeglarskie",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów łącznie już żeglujesz?",
+                      "placeholder": "Podaj liczbę",
+                      "tooltip": "Jako sternik lub załogant",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "zeglarstwo_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika regatowego jachtów jedno- lub dwuosobowych?",
+                      "placeholder": "Podaj liczbę",
+                      "tooltip": "Np. Optymist, Laser, 420, 470, 49er, Finn. Jako sternik lub załogant.",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "zeglarstwo_regatowe",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika regatowego pozostałych jachtów?",
+                      "placeholder": "Podaj liczbę",
+                      "tooltip": "Np. Omega, jachty kabinowe. Jako sternik lub załogant.",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "zeglarstwo_regatowe_pozostale",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli sternika jachtów kabinowych?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "zeglarstwo_kabinowe",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli sternika lekkich jachtów?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "zeglarstwo_lekkie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "zeglarstwo_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Uprawnienia żeglarskie i motorowodne",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Żeglarz Jachtowy",
+                                  "value": "zeglarz_jachtowy"
+                              },
+                              {
+                                  "label": "Jachtowy Sternik Morski",
+                                  "value": "jachtowy_sternik_morski"
+                              },
+                              {
+                                  "label": "Kapitan Jachtowy",
+                                  "value": "kapitan_jachtowy"
+                              },
+                              {
+                                  "label": "Młodszy Instruktor Żeglarstwa",
+                                  "value": "mlodszy_instruktor_zeglarstwa"
+                              },
+                              {
+                                  "label": "Trener Żeglarstwa",
+                                  "value": "trener_zeglarstwa"
+                              },
+                              {
+                                  "label": "Sternik Motorowodny",
+                                  "value": "sternik_motorowodny"
+                              },
+                              {
+                                  "label": "Motorowodny Sternik Morski",
+                                  "value": "motorowodny_sternik_morski"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "uprawnienia_zeglarskie",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  },
+                  {
+                      "label": "Jestem w stanie",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Żeglować na jachcie typu Omega z niedoświadczoną załogą",
+                                  "value": "omega"
+                              },
+                              {
+                                  "label": "Żeglować na jachcie typu Sigma Active z niedoświadczoną załogą",
+                                  "value": "sigma"
+                              },
+                              {
+                                  "label": "Prowadzić kurs na patent Żeglarza Jachtowego",
+                                  "value": "kurs"
+                              },
+                              {
+                                  "label": "Prowadzić zajęcia na Optymistach",
+                                  "value": "optymist"
+                              },
+                              {
+                                  "label": "Prowadzić zajęcia na skiffach typu Topaz Tres",
+                                  "value": "skiff"
+                              },
+                              {
+                                  "label": "Prowadzić jacht kabinowy w roli sternika z niedoświadczoną załogą",
+                                  "value": "rejs"
+                              },
+                              {
+                                  "label": "Żeglować na trapezie",
+                                  "value": "trapez"
+                              },
+                              {
+                                  "label": "Żeglować z wykorzystaniem spinakera lub genakera",
+                                  "value": "spinaker"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "zeglarstwo_zajecia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Windsurfing",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_windsurfing",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "windsurfing"
+              },
+              "type": "panel",
+              "label": "Page 3",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów łącznie już uprawiasz windsurfing?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "windsurfing_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika regatowego?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "windsurfing_regatowo",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "windsurfing_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Windsurfingu",
+                                  "value": "instruktor"
+                              },
+                              {
+                                  "label": "Trener Windsurfingu",
+                                  "value": "trener"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "windsurfing_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Akrobatyka",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_akrobatyka",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "akrobatyka"
+              },
+              "type": "panel",
+              "label": "Page 4",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów łącznie już uprawiasz akrobatykę?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "akrobatyka_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "akrobatyka_zawodnik",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "akrobatyka_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Akrobatyki",
+                                  "value": "instruktor"
+                              },
+                              {
+                                  "label": "Trener Akrobatyki",
+                                  "value": "trener"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "akrobatyka_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Park linowy",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_park_linowy",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "park_linowy"
+              },
+              "type": "panel",
+              "label": "Page 5",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów łącznie wspinasz się lub chodzisz po parkach linowych?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "park_linowy_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "park_linowy_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Wspinaczki",
+                                  "value": "instruktor_wspinaczki"
+                              },
+                              {
+                                  "label": "Instruktor Parku Linowego",
+                                  "value": "instruktor_parku_linowego"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "akrobatyka_uprawnienia1",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Padel",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_padel",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "padel"
+              },
+              "type": "panel",
+              "label": "Page 6",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów łącznie grasz w padla, tenisa ziemnego lub squasha?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "padel_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "padel_zawodnik",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "padel_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Padla",
+                                  "value": "instruktor_padla"
+                              },
+                              {
+                                  "label": "Instruktor Tenisa",
+                                  "value": "instruktor_tenisa"
+                              },
+                              {
+                                  "label": "Instruktor Squasha",
+                                  "value": "instruktor_squasha"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "padel_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Kolarstwo",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_kolarstwo",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "kolarstwo"
+              },
+              "type": "panel",
+              "label": "Padel",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów uprawiasz kolarstwo?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kolarstwo_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego w roli aktywnego zawodnika?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kolarstwo_zawodnik",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kolarstwo_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Kolarstwa",
+                                  "value": "instruktor_kolarstwa"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "kolarstwo_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Taniec",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_taniec",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "taniec"
+              },
+              "type": "panel",
+              "label": "Kolarstwo",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów tańczysz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "taniec_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego biorąc udział w zawodach?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "taniec_zawody",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "taniec_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Tańca",
+                                  "value": "instruktor_tanca"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "taniec_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Kajakarstwo",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_kajakarstwo",
+              "conditional": {
+                  "show": true,
+                  "when": "umiejetnosci",
+                  "eq": "kajakarstwo"
+              },
+              "type": "panel",
+              "label": "Taniec",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów uprawiasz kajakarstwo?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kajakarstwo_lacznie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile z tego biorąc udział w zawodach?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kajakarstwo_zawody",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Ile sezonów szkolisz?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "min": 1,
+                          "max": 50
+                      },
+                      "key": "kajakarstwo_szkolenie",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  },
+                  {
+                      "label": "Czy posiadasz któreś z tych uprawnień?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Instruktor Kajakarstwa",
+                                  "value": "instruktor_kajakarstwa"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "kajakarstwo_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Doświadczenie zawodowe",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_doswiadczenie_zawodowe",
+              "type": "panel",
+              "label": "Page 10",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Ile sezonów pracujesz na naszych obozach?",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "doswiadczenie_nasze",
+                      "type": "number",
+                      "input": true,
+                      "decimalLimit": 0
+                  },
+                  {
+                      "label": "Ile sezonów pracujesz w roli kadry na dużych obozach ale nie naszych?",
+                      "placeholder": "Podaj liczbę",
+                      "tooltip": "50 uczestników lub więcej",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "doswiadczenie_duze",
+                      "type": "number",
+                      "input": true,
+                      "decimalLimit": 0
+                  },
+                  {
+                      "label": "Ile sezonów pracujesz w roli kadry na małych obozach?",
+                      "placeholder": "Podaj liczbę",
+                      "tooltip": "mniej niż 50 uczestników",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "key": "doswiadczenie_male",
+                      "type": "number",
+                      "decimalLimit": 0,
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Dodatkowe umiejętności",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_dodatkowe_umiejetnosci",
+              "type": "panel",
+              "label": "Page 11",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Które z tych zdolności posiadasz?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Gra na gitarze",
+                                  "value": "gitara"
+                              },
+                              {
+                                  "label": "Śpiew",
+                                  "value": "spiew"
+                              },
+                              {
+                                  "label": "Zdolności plastyczne",
+                                  "value": "plastyczne"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "dodatkowe_umiejetnosci",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  },
+                  {
+                      "label": "Które z tych uprawnień posiadasz?",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "Młodszy Ratownik WOPR",
+                                  "value": "ratownik_mlodszy"
+                              },
+                              {
+                                  "label": "Ratownik WOPR",
+                                  "value": "ratownik"
+                              },
+                              {
+                                  "label": "Instruktor Pływania",
+                                  "value": "instruktor_plywania"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "onlyAvailableItems": false
+                      },
+                      "key": "dodatkowe_uprawnienia",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          },
+          {
+              "title": "Dostępne terminy i preferowane obozy",
+              "breadcrumbClickable": true,
+              "buttonSettings": {
+                  "previous": true,
+                  "cancel": true,
+                  "next": true
+              },
+              "scrollToTop": false,
+              "collapsible": false,
+              "key": "page_terminy",
+              "type": "panel",
+              "label": "Page 12",
+              "input": false,
+              "tableView": false,
+              "components": [
+                  {
+                      "label": "Chcę pracować na następującej liczbie turnusów",
+                      "placeholder": "Podaj liczbę",
+                      "mask": false,
+                      "spellcheck": true,
+                      "tableView": false,
+                      "delimiter": false,
+                      "requireDecimal": false,
+                      "inputFormat": "plain",
+                      "validate": {
+                          "required": true,
+                          "min": 1,
+                          "max": 5
+                      },
+                      "key": "ilosc_turnusow",
+                      "type": "number",
+                      "input": true,
+                      "decimalLimit": 0
+                  },
+                  {
+                      "label": "Odpowiadają mi następujące obozy i terminy",
+                      "placeholder": "Wybierz właściwe",
+                      "tableView": true,
+                      "multiple": true,
+                      "data": {
+                          "values": [
+                              {
+                                  "label": "T1 Lalka",
+                                  "value": "t1Lalka"
+                              },
+                              {
+                                  "label": "T1 Żeglarska Zatoka",
+                                  "value": "t1ZeglarskaZatoka"
+                              },
+                              {
+                                  "label": "T1 Rejs",
+                                  "value": "t1Rejs"
+                              },
+                              {
+                                  "label": "T2 Lalka",
+                                  "value": "t2Lalka"
+                              },
+                              {
+                                  "label": "T2 Żeglarska Zatoka",
+                                  "value": "t2ZeglarskaZatoka"
+                              },
+                              {
+                                  "label": "T2 Rejs",
+                                  "value": "t2Rejs"
+                              },
+                              {
+                                  "label": "T3 Lalka",
+                                  "value": "t3Lalka"
+                              },
+                              {
+                                  "label": "T3 Żeglarska Zatoka",
+                                  "value": "t3ZeglarskaZatoka"
+                              },
+                              {
+                                  "label": "T3 Rejs",
+                                  "value": "t3Rejs"
+                              },
+                              {
+                                  "label": "T4 Lalka",
+                                  "value": "t4Lalka"
+                              },
+                              {
+                                  "label": "T4 Żeglarska Zatoka",
+                                  "value": "t4ZeglarskaZatoka"
+                              },
+                              {
+                                  "label": "T4 Rejs",
+                                  "value": "t4Rejs"
+                              },
+                              {
+                                  "label": "T5 Żeglarska Zatoka",
+                                  "value": "t5ZeglarskaZatoka"
+                              },
+                              {
+                                  "label": "T5 Rejs",
+                                  "value": "t5Rejs"
+                              }
+                          ]
+                      },
+                      "selectThreshold": 0.3,
+                      "validate": {
+                          "required": true,
+                          "onlyAvailableItems": false
+                      },
+                      "key": "terminy",
+                      "type": "select",
+                      "indexeddb": {
+                          "filter": {}
+                      },
+                      "input": true
+                  }
+              ]
+          }
+      ]
+  });
+  </script>
+</body>
+</html>
